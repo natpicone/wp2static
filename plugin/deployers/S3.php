@@ -155,7 +155,7 @@ class WP2Static_S3 extends WP2Static_SitePublisher {
         $this->logAction( "PUT'ing file to {$s3_path} in S3" );
 
         $host_name = $this->settings['s3Bucket'] . '.s3.' .
-            $this->settings['s3Region'] . '.amazonaws.com';
+            $this->settings['s3Region'] . '.wasabisys.com';
 
         $this->logAction( "Using S3 Endpoint {$host_name}" );
 
@@ -273,6 +273,13 @@ class WP2Static_S3 extends WP2Static_SitePublisher {
 
         curl_close( $ch );
     }
+
+
+    // curl -X POST "https://api.cloudflare.com/client/v4/zones/023e105f4ecef8ad9ca31a8372d0c353/purge_cache" \
+    //  -H "X-Auth-Email: user@example.com" \
+    //  -H "X-Auth-Key: c2547eb745079dac9320b638f5e225cf483cc5cfdda41" \
+    //  -H "Content-Type: application/json" \
+    //  --data '{"purge_everything":true}'
 
     public function cloudfront_invalidate_all_items() {
         $this->logAction( 'Invalidating all CloudFront items' );
